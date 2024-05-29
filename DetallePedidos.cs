@@ -21,5 +21,7 @@ namespace Entity
         public int Cantidad { get; set; }
         public decimal CostoUnitario { get; set; }
         public decimal CostoTotal { get; set; }
+        public string Imagen { get; set; }
+        public int ID { get; set; }
     }
 }

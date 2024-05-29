@@ -16,9 +16,11 @@ namespace Entity
     {
         public string NumeroPedido { get; set; }
         public string UsuarioPedido { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public decimal CostoTotalPedido { get; set; }
-        public bool PedidoProcesado { get; set; }
-        public bool PedidoEnviado { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<decimal> CostoTotalPedido { get; set; }
+        public string MetodoPago { get; set; }
+        public string Colonia { get; set; }
+        public string Ciudad { get; set; }
+        public Nullable<double> Envío { get; set; }
     }
 }

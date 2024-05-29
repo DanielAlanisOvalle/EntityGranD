@@ -7,7 +7,7 @@
       <Diagram DiagramId="4cd31a5ec20140f9a3cc18f8cb0d33d0" Name="Diagram1">
         <EntityTypeShape EntityType="GranDeShopModel.DetallePedidos" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GranDeShopModel.EncabezadoPedidos" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GranDeShopModel.Usuarios" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GranDeShopModel.Usuarios" Width="1.5" PointX="5" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

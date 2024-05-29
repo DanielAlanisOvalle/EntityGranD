@@ -4,29 +4,33 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GranDeShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GranDeShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DetallePedidos">
           <Key>
-            <PropertyRef Name="NumeroPedido" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="NumeroPedido" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroPedido" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Usuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="Artículo" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="CostoUnitario" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CostoTotal" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Imagen" Type="varchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="EncabezadoPedidos">
           <Key>
             <PropertyRef Name="NumeroPedido" />
           </Key>
-          <Property Name="NumeroPedido" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NumeroPedido" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="UsuarioPedido" Type="varchar" MaxLength="20" />
-          <Property Name="Fecha" Type="datetime" Nullable="false" />
-          <Property Name="CostoTotalPedido" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="PedidoProcesado" Type="bit" Nullable="false" />
-          <Property Name="PedidoEnviado" Type="bit" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="CostoTotalPedido" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="MetodoPago" Type="varchar" MaxLength="100" />
+          <Property Name="Colonia" Type="varchar" MaxLength="200" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="100" />
+          <Property Name="Envío" Type="float" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -37,39 +41,46 @@
           <Property Name="Apellidos" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Contraseña" Type="varchar" MaxLength="50" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Function Name="ObtenerDatosPedido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroPedido" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="GranDeShopModelStoreContainer">
           <EntitySet Name="DetallePedidos" EntityType="Self.DetallePedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EncabezadoPedidos" EntityType="Self.EncabezadoPedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GranDeShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="DetallePedidos">
           <Key>
-            <PropertyRef Name="NumeroPedido" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="NumeroPedido" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroPedido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Artículo" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="CostoUnitario" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CostoTotal" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="EncabezadoPedidos">
           <Key>
             <PropertyRef Name="NumeroPedido" />
           </Key>
-          <Property Name="NumeroPedido" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroPedido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UsuarioPedido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CostoTotalPedido" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="PedidoProcesado" Type="Boolean" Nullable="false" />
-          <Property Name="PedidoEnviado" Type="Boolean" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="CostoTotalPedido" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MetodoPago" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Envío" Type="Double" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -80,12 +91,33 @@
           <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="GranDeShopEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DetallePedidos" EntityType="Self.DetallePedidos" />
           <EntitySet Name="EncabezadoPedidos" EntityType="Self.EncabezadoPedidos" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <FunctionImport Name="ObtenerDatosPedido" ReturnType="Collection(GranDeShopModel.ObtenerDatosPedido_Result)">
+            <Parameter Name="NumeroPedido" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="ObtenerDatosPedido_Result">
+          <Property Type="String" Name="NumeroPedido" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="Artículo" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="CostoTotal" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="CostoUnitario" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Imagen" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CodigoPostal" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="MetodoPago" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -95,6 +127,8 @@
           <EntitySetMapping Name="DetallePedidos">
             <EntityTypeMapping TypeName="GranDeShopModel.DetallePedidos">
               <MappingFragment StoreEntitySet="DetallePedidos">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
                 <ScalarProperty Name="NumeroPedido" ColumnName="NumeroPedido" />
                 <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
@@ -108,18 +142,21 @@
           <EntitySetMapping Name="EncabezadoPedidos">
             <EntityTypeMapping TypeName="GranDeShopModel.EncabezadoPedidos">
               <MappingFragment StoreEntitySet="EncabezadoPedidos">
+                <ScalarProperty Name="Envío" ColumnName="Envío" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="MetodoPago" ColumnName="MetodoPago" />
                 <ScalarProperty Name="NumeroPedido" ColumnName="NumeroPedido" />
                 <ScalarProperty Name="UsuarioPedido" ColumnName="UsuarioPedido" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="CostoTotalPedido" ColumnName="CostoTotalPedido" />
-                <ScalarProperty Name="PedidoProcesado" ColumnName="PedidoProcesado" />
-                <ScalarProperty Name="PedidoEnviado" ColumnName="PedidoEnviado" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="GranDeShopModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
@@ -128,6 +165,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ObtenerDatosPedido" FunctionName="GranDeShopModel.Store.ObtenerDatosPedido">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GranDeShopModel.ObtenerDatosPedido_Result">
+                <ScalarProperty Name="NumeroPedido" ColumnName="NumeroPedido" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Artículo" ColumnName="Artículo" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="CostoTotal" ColumnName="CostoTotal" />
+                <ScalarProperty Name="CostoUnitario" ColumnName="CostoUnitario" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="MetodoPago" ColumnName="MetodoPago" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

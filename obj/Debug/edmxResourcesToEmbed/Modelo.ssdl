@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GranDeShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DetallePedidos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroPedido" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="20" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Artículo" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="CostoUnitario" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CostoTotal" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Imagen" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="EncabezadoPedidos">
+    <Key>
+      <PropertyRef Name="NumeroPedido" />
+    </Key>
+    <Property Name="NumeroPedido" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="UsuarioPedido" Type="varchar" MaxLength="20" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="CostoTotalPedido" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="MetodoPago" Type="varchar" MaxLength="100" />
+    <Property Name="Colonia" Type="varchar" MaxLength="200" />
+    <Property Name="Ciudad" Type="varchar" MaxLength="100" />
+    <Property Name="Envío" Type="float" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellidos" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="50" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Function Name="ObtenerDatosPedido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NumeroPedido" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="GranDeShopModelStoreContainer">
+    <EntitySet Name="DetallePedidos" EntityType="Self.DetallePedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EncabezadoPedidos" EntityType="Self.EncabezadoPedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

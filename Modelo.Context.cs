@@ -12,6 +12,8 @@ namespace Entity
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class GranDeShopEntities : DbContext
     {
@@ -28,5 +30,14 @@ namespace Entity
         public virtual DbSet<DetallePedidos> DetallePedidos { get; set; }
         public virtual DbSet<EncabezadoPedidos> EncabezadoPedidos { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
+    
+        public virtual ObjectResult<ObtenerDatosPedido_Result> ObtenerDatosPedido(string numeroPedido)
+        {
+            var numeroPedidoParameter = numeroPedido != null ?
+                new ObjectParameter("NumeroPedido", numeroPedido) :
+                new ObjectParameter("NumeroPedido", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerDatosPedido_Result>("ObtenerDatosPedido", numeroPedidoParameter);
+        }
     }
 }
